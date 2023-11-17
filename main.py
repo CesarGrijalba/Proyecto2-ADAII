@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from readFile import open_file
+from exect_minizinc import exec_minizinc
 
 # Crear la ventana principal
 ventana = tk.Tk()
@@ -93,18 +94,18 @@ def write_file():
         Rk = convert_to_float(Rk)
         file.write(f'int: J = {J};\n')
         file.write(f'int: K = {K};\n')
-        file.write(f'set of float: Ej = {Ej};\n')
-        file.write(f'set of float: Aj = {Aj};\n')
-        file.write(f'set of float: Gj = {Gj};\n')
-        file.write(f'set of float: Fj = {Fj};\n')
-        file.write(f'set of float: Vj = {Vj};\n')
-        file.write(f'set of float: Pj_Inferior = {Pj_inferior};\n')
-        file.write(f'set of float: Pj_Superior = {Pj_superior};\n')
-        file.write(f'set of float: Supj = {Supj};\n')
-        file.write(f'set of float: Infj = {Infj};\n')
-        file.write(f'set of float: Pj_inicial = {Pj_inicial};\n')
-        file.write(f'set of float: Dk = {Dk};\n')
-        file.write(f'set of float: Rk = {Rk};\n')
+        file.write(f'array[1..J] of float: Ej = {Ej};\n')
+        file.write(f'array[1..J] of float: Aj = {Aj};\n')
+        file.write(f'array[1..J] of int: Gj = {Gj};\n')
+        file.write(f'array[1..J] of float: Fj = {Fj};\n')
+        file.write(f'array[1..J] of float: Vj = {Vj};\n')
+        file.write(f'array[1..J] of float: Pj_Inferior = {Pj_inferior};\n')
+        file.write(f'array[1..J] of float: Pj_superior= {Pj_superior};\n')
+        file.write(f'array[1..J] of float: Supj = {Supj};\n')
+        file.write(f'array[1..J] of float: Infj = {Infj};\n')
+        file.write(f'array[1..J] of float: Pj_inicial = {Pj_inicial};\n')
+        file.write(f'array[1..K] of float: Dk = {Dk};\n')
+        file.write(f'array[1..K] of float: Rk = {Rk};\n')
 
 
 # Crear el botón
@@ -114,6 +115,8 @@ boton.grid(row=0, column=0, columnspan=7, pady=10)
 boton = tk.Button(ventana, text="Guardar y generar dzn", command=write_file)
 boton.grid(row=7, column=0, columnspan=7, pady=10)
 
+boton = tk.Button(ventana, text="Ejecutar modelo", command=exec_minizinc)
+boton.grid(row=7, column=2, columnspan=7, pady=10)
 
 names = ['J', 'K', 'Ej', 'Aj', 'Gj', 'Fj', 'Vj', 'Pj_inferior', 'Pj_superior', 'Supj', 'Infj', 'Pj_inicial', 'Dk', 'Rk']
 
