@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from readFile import open_file
+# from writeFile import write_file
 
 # Crear la ventana principal
 ventana = tk.Tk()
@@ -42,14 +43,18 @@ def agregar_etiquetas():
     campo_Dk.insert(0, Dk)
     campo_Rk.insert(0, Rk)
 
-def obtener_valores():
-    return True
+# Funcion para escribir archivo
+def write_file():
+    file = open ("DatosPUEnTe.dzn", "w")
+    file.write("J="+campo_J.get())
+    file.write("J="+campo_K.get())
+    file.close()
 
 # Crear el botón
 boton = tk.Button(ventana, text="Abrir navegador de archivos", command=agregar_etiquetas)
 boton.grid(row=0, column=0, columnspan=7, pady=10)
 
-boton = tk.Button(ventana, text="Guardar y generar dzn", command=obtener_valores)
+boton = tk.Button(ventana, text="Guardar y generar dzn", command=write_file)
 boton.grid(row=7, column=0, columnspan=7, pady=10)
 
 

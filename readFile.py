@@ -3,7 +3,7 @@ from tkinter import filedialog
 def open_file():
     archivo = filedialog.askopenfilename(title="Seleccionar archivo")
     Ej, Aj, Gj, Fj, Vj, Pj_inferior, Pj_superior, Supj, Infj, Pj_inicial, Dk, Rk = [], [], [], [], [], [], [], [], [], [], [], []
-    
+
     with open(archivo) as file:
         J = file.readline()
         K = file.readline()
