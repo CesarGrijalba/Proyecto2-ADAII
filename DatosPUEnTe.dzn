@@ -1,2 +1,14 @@
-J=3
-J=3
+int: J = 5;
+int: K = 5;
+set of float: Ej = [50.0, 48.0, 25.0, 41.0, 53.0];
+set of float: Aj = [1.0, 0.8, 1.5, 0.9, 1.1];
+set of float: Gj = [0.0, 0.0, 0.0, 0.0, 0.0];
+set of float: Fj = [35.0, 31.0, 26.0, 29.0, 38.0];
+set of float: Vj = [0.1, 0.125, 0.15, 0.115, 0.165];
+set of float: Pj_Inferior = [60.0, 90.0, 55.0, 30.0, 75.0];
+set of float: Pj_Superior = [380.0, 270.0, 180.0, 300.0, 450.0];
+set of float: Supj = [280.0, 200.0, 150.0, 190.0, 330.0];
+set of float: Infj = [300.0, 150.0, 100.0, 250.0, 300.0];
+set of float: Pj_inicial = [0.0, 0.0, 0.0, 0.0, 0.0];
+set of float: Dk = [350.0, 500.0, 400.0, 350.0, 600.0];
+set of float: Rk = [25.0, 60.0, 55.0, 65.0, 80.0];

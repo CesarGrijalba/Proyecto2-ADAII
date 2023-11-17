@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
 from readFile import open_file
-# from writeFile import write_file
 
 # Crear la ventana principal
 ventana = tk.Tk()
@@ -24,10 +23,16 @@ campo_Pj_inicial = tk.Entry(ventana)
 campo_Dk = tk.Entry(ventana)
 campo_Rk = tk.Entry(ventana)
 
-# Funcion para agregar las variables a los campos
+#Funcion para convertor un conjutno de string a nuemros
+#
+def convert_to_float(data_set):
+    numbers_float = [float(x) for x in data_set]
+    return numbers_float
 
+# Funcion para agregar las variables a los campos
 def agregar_etiquetas():
-    J, K, Ej, Aj, Gj, Fj, Vj, Pj_inferior, Pj_superior, Supj, Infj, Pj_inicial, Dk, Rk = open_file()
+    data = open_file()
+    J, K, Ej, Aj, Gj, Fj, Vj, Pj_inferior, Pj_superior, Supj, Infj, Pj_inicial, Dk, Rk = data
     campo_J.insert(0, J)
     campo_K.insert(0, K)
     campo_Ej.insert(0, Ej)
@@ -43,19 +48,58 @@ def agregar_etiquetas():
     campo_Dk.insert(0, Dk)
     campo_Rk.insert(0, Rk)
 
+#  Escribir archivo .dzn
+    output_file = 'DatosPUEnTe.dzn'
+
+    with open(output_file, 'w') as file:
+        J = J.strip()
+        K = K.strip()
+        Ej = convert_to_float(Ej)
+        Aj = convert_to_float(Aj)
+        Gj = convert_to_float(Gj)
+        Fj = convert_to_float(Fj)
+        Vj = convert_to_float(Vj)
+        Pj_inferior = convert_to_float(Pj_inferior)
+        Pj_superior = convert_to_float(Pj_superior)
+        Supj = convert_to_float(Supj)
+        Infj = convert_to_float(Infj)
+        Pj_inicial = convert_to_float(Pj_inicial)
+        Dk = convert_to_float(Dk)
+        Rk = convert_to_float(Rk)
+        file.write(f'int: J = {J};\n')
+        file.write(f'int: K = {K};\n')
+        file.write(f'set of float: Ej = {Ej};\n')
+        file.write(f'set of float: Aj = {Aj};\n')
+        file.write(f'set of float: Gj = {Gj};\n')
+        file.write(f'set of float: Fj = {Fj};\n')
+        file.write(f'set of float: Vj = {Vj};\n')
+        file.write(f'set of float: Pj_Inferior = {Pj_inferior};\n')
+        file.write(f'set of float: Pj_Superior = {Pj_superior};\n')
+        file.write(f'set of float: Supj = {Supj};\n')
+        file.write(f'set of float: Infj = {Infj};\n')
+        file.write(f'set of float: Pj_inicial = {Pj_inicial};\n')
+        file.write(f'set of float: Dk = {Dk};\n')
+        file.write(f'set of float: Rk = {Rk};\n')
+        
+
+
+
+
 # Funcion para escribir archivo
+'''
 def write_file():
     file = open ("DatosPUEnTe.dzn", "w")
     file.write("J="+campo_J.get())
     file.write("J="+campo_K.get())
     file.close()
+'''
 
 # Crear el botón
 boton = tk.Button(ventana, text="Abrir navegador de archivos", command=agregar_etiquetas)
 boton.grid(row=0, column=0, columnspan=7, pady=10)
 
-boton = tk.Button(ventana, text="Guardar y generar dzn", command=write_file)
-boton.grid(row=7, column=0, columnspan=7, pady=10)
+#boton = tk.Button(ventana, text="Guardar y generar dzn", command=write_file)
+#boton.grid(row=7, column=0, columnspan=7, pady=10)
 
 
 names = ['J', 'K', 'Ej', 'Aj', 'Gj', 'Fj', 'Vj', 'Pj_inferior', 'Pj_superior', 'Supj', 'Infj', 'Pj_inicial', 'Dk', 'Rk']
