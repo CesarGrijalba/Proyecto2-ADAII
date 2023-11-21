@@ -2,12 +2,13 @@ import subprocess
 
 
 def exec_minizinc():
-    # Ruta del archivo .mzn y .dzn
-    archivo_mzn = "../PUEnTe.mzn"
-    archivo_dzn = "DatosPUEnTe.dzn"
-
     # Comando para ejecutar en la consola
-    comando = f"minizinc {archivo_mzn}"
-
+    comando = f"minizinc --solver COIN-BC ../PUEnTe.mzn ../DatosPUEnTe.dzn > solution.txt"
     # Ejecutar el comando en la consola
     subprocess.run(comando, shell=True)
+    with open('solution.txt', 'r') as archivo:
+        lineas = archivo.readlines()
+
+    return lineas
+   
+    

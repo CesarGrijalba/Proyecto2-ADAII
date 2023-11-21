@@ -23,6 +23,7 @@ campo_Inf = tk.Entry(ventana)
 campo_P0 = tk.Entry(ventana)
 campo_D = tk.Entry(ventana)
 campo_R = tk.Entry(ventana)
+#salida
 
 
 # Funcion para convertor un conjutno de string a nuemros
@@ -40,12 +41,16 @@ def convert_to_int(data_set):
 
 
 # Funcion para agregar las variables a los campos
+J_MATRIZ = 0
+k_MATRIZ = 0
 def agregar_etiquetas():
+    global J_MATRIZ , k_MATRIZ
     data = open_file()
     J, K, E, A, G, F, V, P_inf, P_sup, Sup, Inf, P0, D, R = data
     J = J.strip()
     K = K.strip()
-
+    J_MATRIZ = int(J)
+    k_MATRIZ = int(K)
     campo_J.delete(0, tk.END)
     campo_K.delete(0, tk.END)
     campo_E.delete(0, tk.END)
@@ -60,6 +65,7 @@ def agregar_etiquetas():
     campo_P0.delete(0, tk.END)
     campo_D.delete(0, tk.END)
     campo_R.delete(0, tk.END)
+    
 
     campo_J.insert(0, J)
     campo_K.insert(0, K)
@@ -75,14 +81,14 @@ def agregar_etiquetas():
     campo_P0.insert(0, P0)
     campo_D.insert(0, D)
     campo_R.insert(0, R)
+    
+
 
 
 # Funcion para escribir archivo
-
-
 def write_file():
     #  Escribir archivo .dzn
-    output_file = "DatosPUEnTe.dzn"
+    output_file = "../DatosPUEnTe.dzn"
     J = campo_J.get()
     K = campo_K.get()
     E = campo_E.get()
@@ -128,7 +134,37 @@ def write_file():
         file.write(f"D = {D};\n")
         file.write(f"R = {R};\n")
 
+def exec():
+    global J_MATRIZ,k_MATRIZ
+    filas = J_MATRIZ
+    columnas = k_MATRIZ
+    salida = exec_minizinc()
+    # Extraer el costo y la matriz P de la salida
+    costo = float(salida[0].split('Costo: ')[1].split(',')[0])
+    matriz_P = eval(salida[0].split('P: ')[1])
 
+    # Crear la ventana
+    ventana = tk.Tk()
+    ventana.title("Mostrar Costo y Matriz P")
+
+    # Crear un widget Text
+    texto_salida = tk.Text(ventana, wrap="word", width=40, height=10)
+    texto_salida.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
+
+    # Mostrar el costo
+    texto_salida.insert(tk.END, f"Costo: {costo}\n\n")
+    texto_salida.insert(tk.END, f"Potencia \n\n")
+    # Organizar la matriz P en filas y columnas
+    for i in range(filas):
+        for j in range(columnas):
+            indice = i * columnas + j
+            valor = matriz_P[indice]
+            texto_salida.insert(tk.END, f"{valor}\t")
+        texto_salida.insert(tk.END, "\n")
+
+    # Hacer el widget Text de solo lectura
+    texto_salida.config(state=tk.DISABLED)
+    
 # Crear el botón
 boton = tk.Button(
     ventana, text="Abrir navegador de archivos", command=agregar_etiquetas
@@ -138,8 +174,9 @@ boton.grid(row=0, column=0, columnspan=7, pady=10)
 boton = tk.Button(ventana, text="Guardar y generar dzn", command=write_file)
 boton.grid(row=7, column=0, columnspan=7, pady=10)
 
-boton = tk.Button(ventana, text="Ejecutar modelo", command=exec_minizinc)
+boton = tk.Button(ventana, text="Ejecutar modelo", command=exec)
 boton.grid(row=7, column=2, columnspan=7, pady=10)
+
 
 names = [
     "J",
@@ -176,6 +213,9 @@ etiqueta_P0 = tk.Label(ventana, text="Ingresa P0:")
 etiqueta_D = tk.Label(ventana, text="Ingresa D:")
 etiqueta_R = tk.Label(ventana, text="Ingresa R:")
 
+
+
+
 # Organizando con grid las etiquetas
 
 etiqueta_J.grid(row=2, column=0, pady=10)
@@ -194,6 +234,8 @@ etiqueta_D.grid(row=5, column=5, pady=10)
 etiqueta_R.grid(row=5, column=6, pady=10)
 
 
+
+
 # Organizando con Grid los campos de texto
 
 campo_J.grid(row=3, column=0, padx=10, pady=10)
@@ -210,6 +252,7 @@ campo_Inf.grid(row=6, column=3, padx=10, pady=10)
 campo_P0.grid(row=6, column=4, padx=10, pady=10)
 campo_D.grid(row=6, column=5, padx=10, pady=10)
 campo_R.grid(row=6, column=6, padx=10, pady=10)
+
 
 # Creando campos de texto por cada variable
 
