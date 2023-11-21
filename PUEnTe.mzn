@@ -149,4 +149,4 @@ constraint forall(k in 1..K) (
 
 solve minimize costo;
 
-% output("Costo: \(costo), P: \(P)")
+output("Costo: \(costo), P: \(P)")
