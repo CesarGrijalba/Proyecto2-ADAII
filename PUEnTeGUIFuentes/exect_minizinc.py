@@ -1,4 +1,5 @@
 import subprocess
+import os
 import platform
 
 
@@ -6,7 +7,12 @@ def exec_minizinc():
     sistema = platform.system()
 
     # Comando para ejecutar en la consola
-    subprocess.run('cd /PUEnTeGUIFuentes', shell=True)
+    directorio_anterior = os.getcwd()
+
+    os.chdir('PUEnTeGUIFuentes')
+
+
+    # subprocess.run('cd PUEnTeGUIFuentes', shell=True)
     comando = f"minizinc --solver COIN-BC ../PUEnTe.mzn ../DatosPUEnTe.dzn > solution.txt"
     # Ejecutar el comando en la consola
     subprocess.run(comando, shell=True)
@@ -18,6 +24,8 @@ def exec_minizinc():
     else:
         subprocess.run('rm solution.txt', shell=True)
     
+    os.chdir(directorio_anterior)
+
     return lineas
    
     
