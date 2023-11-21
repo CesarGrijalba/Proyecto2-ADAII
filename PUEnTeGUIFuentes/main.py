@@ -88,7 +88,7 @@ def agregar_etiquetas():
 # Funcion para escribir archivo
 def write_file():
     #  Escribir archivo .dzn
-    output_file = "../DatosPUEnTe.dzn"
+    output_file = "DatosPUEnTe.dzn"
     J = campo_J.get()
     K = campo_K.get()
     E = campo_E.get()
