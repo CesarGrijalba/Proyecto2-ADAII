@@ -45,6 +45,22 @@ def agregar_etiquetas():
     J, K, E, A, G, F, V, P_inf, P_sup, Sup, Inf, P0, D, R = data
     J = J.strip()
     K = K.strip()
+
+    campo_J.delete(0, tk.END)
+    campo_K.delete(0, tk.END)
+    campo_E.delete(0, tk.END)
+    campo_A.delete(0, tk.END)
+    campo_G.delete(0, tk.END)
+    campo_F.delete(0, tk.END)
+    campo_V.delete(0, tk.END)
+    campo_P_inf.delete(0, tk.END)
+    campo_P_sup.delete(0, tk.END)
+    campo_Sup.delete(0, tk.END)
+    campo_Inf.delete(0, tk.END)
+    campo_P0.delete(0, tk.END)
+    campo_D.delete(0, tk.END)
+    campo_R.delete(0, tk.END)
+
     campo_J.insert(0, J)
     campo_K.insert(0, K)
     campo_E.insert(0, E)
