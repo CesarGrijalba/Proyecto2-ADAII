@@ -3,7 +3,7 @@ from tkinter import filedialog
 
 def open_file():
     archivo = filedialog.askopenfilename(title="Seleccionar archivo")
-    Ej, Aj, Gj, Fj, Vj, Pj_inferior, Pj_superior, Supj, Infj, Pj_inicial, Dk, Rk = (
+    E, A, G, F, V, P_Inf, P_Sup, Sup, Inf, P0, D, R = (
         [],
         [],
         [],
@@ -21,32 +21,32 @@ def open_file():
     with open(archivo) as file:
         J = file.readline()
         K = file.readline()
-        Ej = (file.readline()).strip().split(",")
-        Aj = (file.readline()).strip().split(",")
-        Gj = (file.readline()).strip().split(",")
-        Fj = (file.readline()).strip().split(",")
-        Vj = (file.readline()).strip().split(",")
-        Pj_inferior = (file.readline()).strip().split(",")
-        Pj_superior = (file.readline()).strip().split(",")
-        Supj = (file.readline()).strip().split(",")
-        Infj = (file.readline()).strip().split(",")
-        Pj_inicial = (file.readline()).strip().split(",")
-        Dk = (file.readline()).strip().split(",")
-        Rk = (file.readline()).strip().split(",")
+        E = (file.readline()).strip().split(",")
+        A = (file.readline()).strip().split(",")
+        G = (file.readline()).strip().split(",")
+        F = (file.readline()).strip().split(",")
+        V = (file.readline()).strip().split(",")
+        P_Inf = (file.readline()).strip().split(",")
+        P_Sup = (file.readline()).strip().split(",")
+        Sup = (file.readline()).strip().split(",")
+        Inf = (file.readline()).strip().split(",")
+        P0 = (file.readline()).strip().split(",")
+        D = (file.readline()).strip().split(",")
+        R = (file.readline()).strip().split(",")
 
     return (
         J,
         K,
-        Ej,
-        Aj,
-        Gj,
-        Fj,
-        Vj,
-        Pj_inferior,
-        Pj_superior,
-        Supj,
-        Infj,
-        Pj_inicial,
-        Dk,
-        Rk,
+        E,
+        A,
+        G,
+        F,
+        V,
+        P_Inf,
+        P_Sup,
+        Sup,
+        Inf,
+        P0,
+        D,
+        R,
     )
