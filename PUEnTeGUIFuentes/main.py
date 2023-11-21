@@ -139,9 +139,12 @@ def exec():
     filas = J_MATRIZ
     columnas = k_MATRIZ
     salida = exec_minizinc()
+    print (salida)
     # Extraer el costo y la matriz P de la salida
     costo = float(salida[0].split('Costo: ')[1].split(',')[0])
     matriz_P = eval(salida[0].split('P: ')[1])
+
+
 
     # Crear la ventana
     ventana = tk.Tk()
