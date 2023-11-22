@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import ttk, filedialog
+from tkinter.scrolledtext import ScrolledText
 from readFile import open_file
 from exect_minizinc import exec_minizinc
 
@@ -23,7 +24,7 @@ campo_Inf = tk.Entry(ventana)
 campo_P0 = tk.Entry(ventana)
 campo_D = tk.Entry(ventana)
 campo_R = tk.Entry(ventana)
-#salida
+# salida
 
 
 # Funcion para convertor un conjutno de string a nuemros
@@ -43,8 +44,10 @@ def convert_to_int(data_set):
 # Funcion para agregar las variables a los campos
 J_MATRIZ = 0
 k_MATRIZ = 0
+
+
 def agregar_etiquetas():
-    global J_MATRIZ , k_MATRIZ
+    global J_MATRIZ, k_MATRIZ
     data = open_file()
     J, K, E, A, G, F, V, P_inf, P_sup, Sup, Inf, P0, D, R = data
     J = J.strip()
@@ -65,7 +68,6 @@ def agregar_etiquetas():
     campo_P0.delete(0, tk.END)
     campo_D.delete(0, tk.END)
     campo_R.delete(0, tk.END)
-    
 
     campo_J.insert(0, J)
     campo_K.insert(0, K)
@@ -81,8 +83,6 @@ def agregar_etiquetas():
     campo_P0.insert(0, P0)
     campo_D.insert(0, D)
     campo_R.insert(0, R)
-    
-
 
 
 # Funcion para escribir archivo
@@ -133,25 +133,25 @@ def write_file():
         file.write(f"P0 = {P0};\n")
         file.write(f"D = {D};\n")
         file.write(f"R = {R};\n")
+    print("Archivo .dzn generado")
+
 
 def exec():
-    global J_MATRIZ,k_MATRIZ
+    global J_MATRIZ, k_MATRIZ
     filas = J_MATRIZ
     columnas = k_MATRIZ
     salida = exec_minizinc()
-    print (salida)
+    print(salida)
     # Extraer el costo y la matriz P de la salida
-    costo = float(salida[0].split('Costo: ')[1].split(',')[0])
-    matriz_P = eval(salida[0].split('P: ')[1])
-
-
+    costo = float(salida[0].split("Costo: ")[1].split(",")[0])
+    matriz_P = eval(salida[0].split("P: ")[1])
 
     # Crear la ventana
     ventana = tk.Tk()
     ventana.title("Mostrar Costo y Matriz P")
 
     # Crear un widget Text
-    texto_salida = tk.Text(ventana, wrap="word", width=40, height=10)
+    texto_salida = ScrolledText(ventana, wrap="word", width=40, height=10)
     texto_salida.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
 
     # Mostrar el costo
@@ -167,7 +167,8 @@ def exec():
 
     # Hacer el widget Text de solo lectura
     texto_salida.config(state=tk.DISABLED)
-    
+
+
 # Crear el botón
 boton = tk.Button(
     ventana, text="Abrir navegador de archivos", command=agregar_etiquetas
@@ -217,8 +218,6 @@ etiqueta_D = tk.Label(ventana, text="Ingresa D:")
 etiqueta_R = tk.Label(ventana, text="Ingresa R:")
 
 
-
-
 # Organizando con grid las etiquetas
 
 etiqueta_J.grid(row=2, column=0, pady=10)
@@ -237,8 +236,6 @@ etiqueta_D.grid(row=5, column=5, pady=10)
 etiqueta_R.grid(row=5, column=6, pady=10)
 
 
-
-
 # Organizando con Grid los campos de texto
 
 campo_J.grid(row=3, column=0, padx=10, pady=10)
@@ -255,10 +252,6 @@ campo_Inf.grid(row=6, column=3, padx=10, pady=10)
 campo_P0.grid(row=6, column=4, padx=10, pady=10)
 campo_D.grid(row=6, column=5, padx=10, pady=10)
 campo_R.grid(row=6, column=6, padx=10, pady=10)
-
-
-# Creando campos de texto por cada variable
-
 
 # Iniciar el bucle principal de la interfaz gráfica
 ventana.mainloop()
