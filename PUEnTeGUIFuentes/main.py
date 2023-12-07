@@ -143,8 +143,12 @@ def exec():
     salida = exec_minizinc()
     print(salida)
     # Extraer el costo y la matriz P de la salida
-    costo = float(salida[0].split("Costo: ")[1].split(",")[0])
-    matriz_P = eval(salida[0].split("P: ")[1])
+    try:
+        costo = float(salida[0].split("Costo: ")[1].split(",")[0])
+        matriz_P = eval(salida[0].split("P: ")[1])
+    except IndexError:
+        costo = "INSATISFACTIBLE"
+        matriz_P = ""
 
     # Crear la ventana
     ventana = tk.Tk()
@@ -158,12 +162,13 @@ def exec():
     texto_salida.insert(tk.END, f"Costo: {costo}\n\n")
     texto_salida.insert(tk.END, f"Potencia \n\n")
     # Organizar la matriz P en filas y columnas
-    for i in range(filas):
-        for j in range(columnas):
-            indice = i * columnas + j
-            valor = matriz_P[indice]
-            texto_salida.insert(tk.END, f"{valor}\t")
-        texto_salida.insert(tk.END, "\n")
+    if type(matriz_P) is not str:
+        for i in range(filas):
+            for j in range(columnas):
+                indice = i * columnas + j
+                valor = matriz_P[indice]
+                texto_salida.insert(tk.END, f"{valor}\t")
+            texto_salida.insert(tk.END, "\n")
 
     # Hacer el widget Text de solo lectura
     texto_salida.config(state=tk.DISABLED)
